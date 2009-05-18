@@ -8,8 +8,7 @@ def load_template_source(template_name, template_dirs=None,
     request = get_current_request()
     test_template_name = request.ab.run(template_name)
 
-    return default_template_loader(test_template_name, 
-        template_dirs=template_dirs)
+    return template_loader(test_template_name, template_dirs=template_dirs)
 load_template_source.is_usable = True
         
         
