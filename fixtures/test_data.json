@@ -1,0 +1,1 @@
+[{"pk": 1, "model": "ab.experiment", "fields": {"template_name": "original.html", "name": "Test", "goal": "/goal/"}}, {"pk": 1, "model": "ab.test", "fields": {"conversions": 0, "template_name": "original.html", "hits": 0, "experiment": 1}}, {"pk": 2, "model": "ab.test", "fields": {"conversions": 0, "template_name": "test.html", "hits": 0, "experiment": 1}}]
