@@ -6,13 +6,32 @@ Create simple A/B tests in Django by dynamically switching templates. Records un
 Usage
 =====
 
-1. Add `ab` to your `INSTALLED_APPS` in `settings.py`.
+ 1. Update your `settings.py`:
+ 
+        # Add `ab` to `INSTALLED_APPS`
+        INSTALLED_APPS = (
+            ...
+            'ab',
+            )
+            
+        # Add `ab.middleware.ABMiddleware` to `MIDDLEWARE_CLASSES`
+        MIDDLEWARE_CLASSES = (
+            'django.middleware.common.CommonMiddleware',
+            'django.contrib.sessions.middleware.SessionMiddleware',
+            ...
+            'ab.middleware.ABMiddleware',
+        )
 
-2. Add `ab.middleware.ABMiddleware` to your `MIDDLEWARE_CLASSES` in `settings.py`.
+        # Add `ab.loaders.load_template_source` as your _FIRST_ `TEMPLATE_LOADERS`.
+        TEMPLATE_LOADERS = (
+            'ab.loaders.load_template_source',
+            'django.template.loaders.filesystem.load_template_source',
+            ...
+        )
+ 
+ 2. Run `python manage.py sync_db` to create the testing tables.
 
-3. Run `python manage.py sync_db` to create the testing tables.
-
-4. Create some tests in the Django admin!
+ 3. Create some tests in the Django admin (or like this from the command line)!
 
         from ab.models import Experiment, Test
         
@@ -28,7 +47,7 @@ Usage
         Test.objects.create(template_name="index_1.html", experiment=exp)
         Test.objects.create(template_name="index_2.html", experiment=exp)
 
-5. Profit.
+ 5. Profit.
 
 
 Notes
