@@ -23,7 +23,7 @@ class AB(object):
         hasn't already been converted.
         """
         return self.is_experiment_active(exp) and not self.is_experiment_converted(exp) \
-            and self.request.path == exp.goal
+            and exp.goal in self.request.path
         
     def is_experiment_active(self, exp):
         """True if this Experiment is active."""

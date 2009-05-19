@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class Experiment(models.Model):
     """
     
@@ -22,8 +23,10 @@ class Test(models.Model):
     experiment = models.ForeignKey(Experiment)
     template_name = models.CharField(max_length=255,
         help_text="Example: 'registration/signup_1.html'. The template to be tested.")
-    hits = models.IntegerField(blank=True, default=0)
-    conversions = models.IntegerField(blank=True, default=0)
+    hits = models.IntegerField(blank=True, default=0, 
+        help_text="# uniques that have seen this test.")
+    conversions = models.IntegerField(blank=True, default=0,
+        help_text="# uniques that have reached the goal from this test.")
     
     def __unicode__(self):
         return self.template_name
